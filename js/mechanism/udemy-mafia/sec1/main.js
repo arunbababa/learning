@@ -109,13 +109,55 @@
 // えマジかてっきりletだから上書きされてa = 9が参照されるかと思ったエーなんでだ
 // ヒント兼用復習 letとconstはグローバルスコープのプロパティにならねーよ
 
-let a = 2;
-window.a = 9
-function fn1() {
-    function fn2(){
-        console.log(a)
-        let a = 3;
+// let a = 2;
+// window.a = 9
+// function fn1() {
+//     function fn2(){
+//         console.log(a)
+//         let a = 3;
+//     }
+//     fn2()
+// }
+// fn1();
+
+// クロージャー
+
+// プライベート変数について
+function incrementFactory(){
+    let num = 0;
+    function increment(){
+        num += 1;
+        console.log(num)
     }
-    fn2()
+    return increment
 }
-fn1();
+const a = incrementFactory();
+a();
+a();
+a();
+
+// もし以下だったら何が問題だと思う？→numが書き換えられてしまう可能性があるから、意図しない動作になる可能性がある
+
+let num = 0;
+function increment(){
+    num += 1;
+    console.log(num)
+}
+
+increment();
+increment();
+increment();
+
+// 動的な関数の生成について
+
+// 以下の感じで2段階セットできるね変数を
+function addNumberFactory(num){
+    function addNumber(value){
+        return num + value
+    }
+    return addNumber
+}
+const add5 = addNumberFactory(5);
+const add10 = addNumberFactory(10);
+const result = add10(10)
+console.log(result)
