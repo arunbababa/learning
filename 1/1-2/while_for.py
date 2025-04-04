@@ -5,18 +5,18 @@
 print("1~nまでの総和を求めます")
 n = int(input("nの値を設定してください:"))
 i = 0
-sum = 0
+sum_i = 0
 while i <= n:
-    sum += i
+    sum_i += i
     i += 1
-print(f"合計は{sum}です")
+print(f"合計は{sum_i}です")
 
 # whileの場合、処理実行の前に繰り返しを続けるか判定する、前判定繰り返しという
 
 # ガウスの方法を使えばプログラム的に繰り返す必要がなくなる
 n = int(input("1~nまでの合計を求めます、nを設定してください:n="))
 i = 0
-sum = 0
+sum_i = 0
 print((1+n)*n/2)
 
 
