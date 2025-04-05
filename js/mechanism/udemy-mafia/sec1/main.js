@@ -35,7 +35,7 @@
 // ブロックとは
 // 波かっこ {} のこと
 // ブロックスコープのルール
-// var使えない
+// var使えない　ブロックの中でvar使うと巻き上げ怒ってブロック買いから使えてしまう
 
 // 正常系
 // {
@@ -123,41 +123,63 @@
 // クロージャー
 
 // プライベート変数について
-function incrementFactory(){
-    let num = 0;
-    function increment(){
-        num += 1;
-        console.log(num)
-    }
-    return increment
-}
-const a = incrementFactory();
-a();
-a();
-a();
+// function incrementFactory(){
+//     let num = 0;
+//     function increment(){
+//         num += 1;
+//         console.log(num)
+//     }
+//     return increment
+// }
+// const a = incrementFactory();
+// a();
+// a();
+// a();
 
 // もし以下だったら何が問題だと思う？→numが書き換えられてしまう可能性があるから、意図しない動作になる可能性がある
 
-let num = 0;
-function increment(){
-    num += 1;
-    console.log(num)
-}
+// let num = 0;
+// function increment(){
+//     num += 1;
+//     console.log(num)
+// }
 
-increment();
-increment();
-increment();
+// increment();
+// increment();
+// increment();
 
 // 動的な関数の生成について
 
 // 以下の感じで2段階セットできるね変数を
-function addNumberFactory(num){
-    function addNumber(value){
-        return num + value
-    }
-    return addNumber
+// function addNumberFactory(num){
+//     function addNumber(value){
+//         return num + value
+//     }
+//     return addNumber
+// }
+// const add5 = addNumberFactory(5);
+// const add10 = addNumberFactory(10);
+// const result = add10(10)
+// console.log(result)
+
+// 即時関数
+
+function a(){
+    console.log("called")
 }
-const add5 = addNumberFactory(5);
-const add10 = addNumberFactory(10);
-const result = add10(10)
-console.log(result)
+
+a()
+
+// これを即時関数に書き直すと...?
+(function(){
+    console.log("called")
+    return 0;
+})()
+// これはつまり(a)()と同じ、そして一回だけ使うこんな名前のない関数の場合（まぁ即時関数で使いたい場合）()でくくらないとあかんグループ化して無名関数としてみてもらうために
+// 詳しくは次まで https://wp-p.info/tpl_rep.php?cat=js-intermediate&fl=r11
+
+// なお()には２つの意味がある、関数実行とグループ化
+
+//  なるほどわかってきたぞ、関数定義と実行が隣接というかもうすぐやねん
+
+// 使いどころは？→ローカル変数の切り分けというか管理したい場合に便利名前もつけなくていいしね
