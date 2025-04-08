@@ -1,4 +1,4 @@
-let message: string = 'Hello, ts-node-dev!';
+let message: string = 'Hello, ts-node-dev! 監視中';
 console.log({ message });
 
 
