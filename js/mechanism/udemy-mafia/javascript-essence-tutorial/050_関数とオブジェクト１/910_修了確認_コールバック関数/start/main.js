@@ -12,6 +12,11 @@ const person = {
     }
 }
 
+// OK
+setTimeout(() => {
+    console.log(person.hello())
+}, 1000);
+
 // setTimeout(/** ここに追記 */, 1000);
 
 /**
@@ -25,6 +30,10 @@ const person = {
  * 示する関数です。
  */
 
+// OK
+setTimeout(() => {
+    alert(person.hello())
+}, 1000);
 
 /**
  * 問題３：
@@ -37,7 +46,7 @@ const person = {
  * 'hello'または'hey'のどちらでしょうか？
  */
 const obj = {};
-obj.greeting = function() {
+obj.greeting = function () {
     console.log('hello');
 }
 
@@ -46,10 +55,10 @@ function after1s(callack) {
 }
 
 // この時点で実行します。
-// after1s(obj.greeting);
+after1s(obj.greeting); // んー先にこっち実行されて巻き上げとか多分ないしあれあるっけ？まぁないと思うにかけるのでhelloです！　←　正解　逆に巻き上げある時を知ればいいね
 
 // この後でgreetingを書き換えます。
-obj.greeting = function() {
+obj.greeting = function () {
     console.log('hey');
 }
 
@@ -63,34 +72,41 @@ obj.greeting = function() {
  * 
  * ※コールバック関数を用いて実装してください。
  */
+
+// んー思いつくのはplus:[consoleFunc()...,alertFunc()...]みたいにすることかなぁこれで呼び出せるんか？ calc.plus.consoleFunc(5)っていう風に
 function calcFactory(val) {
     return {
-        plus: function(target) {
+        plus: function (target, callack) {
             const newVal = val + target;
-            console.log(`${val} + ${target} = ${newVal}`);
+            callack(`${val} + ${target} = ${newVal}`);
             val = newVal;
         },
-        minus: function(target) {
+        minus: function (target) {
             const newVal = val - target;
-            console.log(`${val} - ${target} = ${newVal}`);
+            callack(`${val} - ${target} = ${newVal}`);
             val = newVal;
         },
-        multiply: function(target) {
+        multiply: function (target) {
             const newVal = val * target;
-            console.log(`${val} x ${target} = ${newVal}`);
+            callack(`${val} x ${target} = ${newVal}`);
             val = newVal;
         },
-        divide: function(target) {
+        divide: function (target) {
             const newVal = val / target;
-            console.log(`${val} / ${target} = ${newVal}`);
+            callack(`${val} / ${target} = ${newVal}`);
             val = newVal;
         }
     };
 }
 
+// 出力用コールバック関数
+const consoleOutput = (msg) => console.log(msg);
+const alertOutput = (msg) => alert(msg);
+
 const calc = calcFactory(10);
-calc.plus(5); 
-calc.minus(3); 
-calc.multiply(3);
-calc.divide(2);
+calc.plus(5, consoleOutput);
+calc.plus(5, alertOutput);
+// calc.minus(3);
+// calc.multiply(3);
+// calc.divide(2);
 
