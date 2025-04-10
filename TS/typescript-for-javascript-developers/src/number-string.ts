@@ -1,4 +1,4 @@
-export {};
+export { };
 
 let year: number = 1976;
 // year = false;
