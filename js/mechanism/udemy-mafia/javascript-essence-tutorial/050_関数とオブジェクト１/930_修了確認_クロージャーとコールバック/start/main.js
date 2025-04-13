@@ -9,10 +9,15 @@
  * 
  */
 function hello(name) {
-  
+    return function () {
+        console.log('hello' + name)
+    }
 }
 
 /**
  * 実行文は以下の通りです。
  */
-setTimeout(hello('Tom'), 1000);
+setTimeout(hello('Tommmmmm'), 1000);
+
+// 前提としてもろ忘れでチャレンジ
+// まぁなんか普通にクロージャとかいいから戻り値に関数を設定すればよい系
