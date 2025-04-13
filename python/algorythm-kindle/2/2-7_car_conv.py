@@ -11,7 +11,7 @@ def card_conv(x:int, r:int) -> str:
         
     return d[::-1]
         
-print(card_conv(8921, 2))
+# print(card_conv(8921, 2))
 
 # 自分なりの理解を追加
 # 数学をブログラム言語に変換したのみ
@@ -25,16 +25,19 @@ if __name__ == '__main__':
     while True:
         while True:
             no = int(input('変換する非負の整数'))
-            if no > 0:
+            if no > 0: # 正ならwhile抜けるようにするバリデーション それ以外はアウトとして繰り返させる
                 break
             
         while True:
             cd = int(input('何進数に変換しますか？(2~36)'))
-            if 2 <= cd <= 36:
+            if 2 <= cd <= 36: # 正ならwhile抜けるようにするバリデーション それ以外はアウトとして繰り返させる
                 break
             
         print(f'{cd}進数では{card_conv(no, cd)}です。')
         
         retry = input('もう一度処理を実行しますか？(Y / N)')
-        if retry in {'N', 'n'}:
+        if retry in {'N', 'n'}: # 正ならwhile抜けるようにするバリデーション それ以外はアウトとして繰り返させる これはtopのwhileに対してです
             break
+        
+# whileの使い方が全然思いつかなかった
+# 確かにユーザと対話的になった瞬間に意図しないinputがくる可能性があるのでそこはwhileで排除する
