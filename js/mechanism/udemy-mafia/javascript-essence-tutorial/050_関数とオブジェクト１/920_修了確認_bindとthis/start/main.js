@@ -1,6 +1,6 @@
 const person = {
     name: 'Tom',
-    bye: () => {
+    bye() {
         console.log('Bye ' + this.name);
     },
     hello: function (greeting) {
@@ -22,9 +22,8 @@ const person = {
      * ２．アロー関数
      * ３．thisを一旦変数に代入
      */
+    // これ分からん過ぎるので飛ばすタスク追加
 
-
-    
 }
 
 /**
@@ -33,7 +32,8 @@ const person = {
  * と出力されるように、以下のコード
  * の記載を変更しましょう。
  */
-setTimeout(person.hello, 1000);
+// setTimeout(person.hello('hello'), 1000); // ちゃうbindを使えって話だ てかこれ良くないsetTimeuotの中に与えるのはコールバックだこれは実行結果を渡していて意味がない
+setTimeout(person.hello.bind(person, 'hello'), 1000); // personオブジェクトが固定参照先person.helloのね んで第二引数に何を与えるかこの場合greetingだねを設定できる
 
 /**
  * 問題２：
@@ -41,7 +41,7 @@ setTimeout(person.hello, 1000);
  * と出力されるように、
  * 以下のコードを変更してください。
  */
-alert(person.hello);
+alert(person.hello('hello'));
 
 /**
  * 問題３：
@@ -50,4 +50,4 @@ alert(person.hello);
  * "Bye"しか表示されませんでした。
  * "Bye Tom"とするためにはどうすればよいでしょうか？
  */
-setTimeout(person.bye.bind(person), 1000);
+setTimeout(person.bye.bind(person), 1000); // アロー関数アウト！this取れない！ので無名関数にすれば良かった省略記法もチャックね
