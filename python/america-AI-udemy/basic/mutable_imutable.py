@@ -15,3 +15,18 @@ a += 2
 print(id(a)) # 12行目とは異なる
 
 # これがミュータブル、イミュータブル感の挙動の差
+
+# for文での一例を考えてみよう、どちらが効率的？
+
+# immutable
+a = ''
+for i in range(1,11):
+    a += '-' + str(i)
+print(a)               # こっちはなんどもa変数のメモリを新しく作るから非効率
+
+# mutable
+l = []
+for n in range(1,11):  # こっちはリストメモリを使いまわすので上と比べて効率が良い
+    l.append(str(n))
+b ='-'.join(l)
+print(b)
