@@ -1,5 +1,6 @@
-export {};
+export { };
 
+// おぉすげぇ！下のMonthsJsと比較して！自動的に連番を付与してくれる、しかも最初を以下のように1にするとそれ以降の連番に自動的になってくれる
 enum Months {
   January = 1,
   February,
