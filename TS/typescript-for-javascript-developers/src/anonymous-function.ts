@@ -1,6 +1,6 @@
-export {};
+export { };
 
-let bmi: (height: number, weight: number) => number = function(
+let bmi: (height: number, weight: number) => number = function (
   height: number,
   weight: number
 ): number {
@@ -8,3 +8,5 @@ let bmi: (height: number, weight: number) => number = function(
 };
 
 console.log(bmi(1.78, 86));
+
+// これがまさに関数の型定義
