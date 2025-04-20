@@ -16,18 +16,47 @@
 
 # 改良
 # パターン2
+# counter = 0                                    # 除算の回数
+# ptr = 0                                        # 得られた素数の個数
+# prime = [None] * 500                           # 素数を格納する配列
+
+# prime[ptr] = 2                                 # 2は素数である
+# ptr += 1
+
+# for n in range(3, 1001, 2):                    # ステップを2ずつとしているのは偶数に関しては2で割り切れて明らかに素数ではないため、奇数だけ確認すればいいよねの意
+#     for i in range(1, ptr):
+#         counter += 1
+#         if n % prime[i] == 0:
+#             break
+#     else:
+#         prime[ptr] = n                         # 素数の配列として登録
+#         ptr += 1
+        
+# for i in range(ptr):
+#     print(prime[i])
+# print(f'除算を行った回数:{counter}')
+
+# メモ
+# 同じ階を得るためのアルゴリズムは一つであるとは限らない
+# 高速なアルゴリズムは、より多くの記憶領域を必要とする傾向がある
+
+# さらに改良 パターン3 1000以下の素数を列挙するプログラム
 counter = 0                                    # 除算の回数
 ptr = 0                                        # 得られた素数の個数
 prime = [None] * 500                           # 素数を格納する配列
 
 prime[ptr] = 2                                 # 2は素数である
 ptr += 1
+prime[ptr] = 3                                 # 3は素数である
+ptr += 1
 
-for n in range(3, 1001, 2):                    # ステップを2ずつとしているのは偶数に関しては2で割り切れて明らかに素数ではないため、奇数だけ確認すればいいよねの意
-    for i in range(1, ptr):
-        counter += 1
+for n in range(5, 1001, 2):                    # 奇数だけ判定する、４は除外自明なので
+    i = 1
+    while prime[i] * prime[i] <= n:           # 素数の2乗までで十分
+        counter += 2                          # 1回のループで2つの除算を行うため、55,57行目
         if n % prime[i] == 0:
             break
+        i += 1
     else:
         prime[ptr] = n                         # 素数の配列として登録
         ptr += 1
@@ -35,7 +64,3 @@ for n in range(3, 1001, 2):                    # ステップを2ずつとして
 for i in range(ptr):
     print(prime[i])
 print(f'除算を行った回数:{counter}')
-
-# メモ
-# 同じ階を得るためのアルゴリズムは一つであるとは限らない
-# 高速なアルゴリズムは、より多くの記憶領域を必要とする傾向がある
