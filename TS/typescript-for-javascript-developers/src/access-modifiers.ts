@@ -1,10 +1,10 @@
-export {};
+export { };
 
 class Person {
-  public name: string;
+  public name: string; // publicに関してはあってもなくても変わらない
   // private age: number;
   protected age: number;
-  protected nationality: string;
+  protected nationality: string; // 自身のクラスとサブクラスからアクセス可能 継承とかでね
 
   constructor(name: string, age: number, nationality: string) {
     this.name = name;
@@ -19,7 +19,7 @@ class Person {
 
 class Android extends Person {
   constructor(name: string, age: number, nationality: string) {
-    super(name, age, nationality);
+    super(name, age, nationality); // superは親クラスの中からsuperが属するメソッド（この場合constructor）と同名のメソッドの役目をする、ので基本的にその同名のクラスが親で使われるように引数を与える
   }
 
   profile(): string {
